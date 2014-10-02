@@ -2,18 +2,22 @@
 
 namespace Marmelab\Silex\Provider\Silrest\Config;
 
+use Marmelab\Silex\Provider\Silrest\Parser\SilrestConfigParser;
+
 class ValidConfig
 {
-    protected $configFile;
+    protected $config;
 
-    public function __construct($configFile)
+    public function __construct($configFile, SilrestConfigParser $parser)
     {
-        //TODO use cache
-        $this->configFile = $configFile;
+        if (!file_exists($configFile) || !is_readable($configFile) || is_dir($configFile)) {
+            throw new \Exception("api config file is unreachable");
+        }
+        $this->config = $parser->parse($configFile);
     }
 
     public function getConfig()
     {
-        return true;
+        return $this->config;
     }
 }

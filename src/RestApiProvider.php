@@ -9,13 +9,8 @@ class RestApiProvider implements ServiceProviderInterface
 {
     public function boot(Application $app)
     {
-        $controllers = $app['controllers_factory'];
-
-        $controllers->get('/', 'rest_api.restController:getAction')
-            ->method('GET')
-            ->bind('objectname.actionname');
-
-        $app['controllers']->mount($app['rest_api.url_prefixe'], $controllers);
+        $app['rest_api.builder']->setConfig($app['rest_api.configValidator']->getConfig());
+        $app['rest_api.builder']->buildRouting();
     }
 
     public function register(Application $app)
@@ -23,6 +18,14 @@ class RestApiProvider implements ServiceProviderInterface
         $app['rest_api.restController'] = $app->share(function () use ($app) {
             return new Controller\RestController($app['rest_api.config_file']);
         });
+        $app['rest_api.configParser'] = $app->share(function () {
+            return new Parser\RamlParser();
+        });
+        $app['rest_api.configValidator'] = $app->share(function () use ($app) {
+            return new Config\ValidConfig($app['rest_api.config_file'], $app['rest_api.configParser']);
+        });
+        $app['rest_api.builder'] = $app->share(function () use ($app) {
+            return new Config\BuildConfig($app);
+        });
     }
-
 }
