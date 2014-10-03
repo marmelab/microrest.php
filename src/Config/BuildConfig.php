@@ -24,12 +24,32 @@ class BuildConfig
 
     public function buildRouting()
     {
+        $firstClassObjects = array();
         foreach ($this->config as $index => $value) {
             if (strpos($index, '/') !== false) {
+                $firstClassObjects[] = strtolower(str_replace('/', '', $index));
                 self::browseCollection($index, $value);
             }
         }
+        self::buildHomePage($firstClassObjects);
+        self::buildCreateDbPage($firstClassObjects);
         $this->app['controllers']->mount($this->app['rest_api.url_prefixe'], $this->controllers);
+    }
+
+    private function buildHomePage(array $firstClassObjects)
+    {
+        $this->controllers->match('/', 'rest_api.restController:homeAction')
+             ->method('GET')
+             ->setDefault("firstClassObjects", $firstClassObjects)
+             ->bind('silrest.home');
+    }
+
+    private function buildCreateDbPage(array $firstClassObjects)
+    {
+        $this->controllers->match('/create_database_tables', 'rest_api.restController:createDbAction')
+             ->method('GET')
+             ->setDefault("dbTables", $firstClassObjects)
+             ->bind('silrest.create_db');
     }
 
     private function browseCollection($collectionName, array $collectionDatas, $parent = null)

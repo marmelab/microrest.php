@@ -16,7 +16,7 @@ class RestApiProvider implements ServiceProviderInterface
     public function register(Application $app)
     {
         $app['rest_api.restController'] = $app->share(function () use ($app) {
-            return new Controller\RestController($app['rest_api.config_file']);
+            return new Controller\RestController($app['rest_api.config_file'], $app['db']);
         });
         $app['rest_api.configParser'] = $app->share(function () {
             return new Parser\RamlParser();
