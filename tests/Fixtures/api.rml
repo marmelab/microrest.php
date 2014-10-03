@@ -1,0 +1,31 @@
+#%RAML 0.8
+title: Just a fake api about music
+version: v1
+/artists:
+  displayName: Artists
+  post:
+    description: Add artist
+  get:
+    description: List all artists
+  /{artistId}:
+    displayName: Artist
+    delete:
+      description: remove artist
+    put:
+      description: update artist
+    get:
+      description: get artist
+/albums:
+  displayName: Albums
+  post:
+    description: add album
+  get:
+    description: list albums
+  /{albumId}:
+    displayName: Album
+    delete:
+      description: delete album
+    put:
+      description: update album
+    get:
+      description: get album
