@@ -1,10 +1,10 @@
 {
-    "name": "alexisjanvier/silrest",
+    "name": "marmelab/silrest",
     "description": "Silex Provider that generates rest api from a raml api description file",
     "require": {
         "silex/silex": "1.2",
         "alecsammon/php-raml-parser": "dev-master",
-        "doctrine/dbal": "2.2.*",
+        "doctrine/dbal": "~2.2",
         "symfony/serializer": ">=2.3,<2.5-dev"
     },
     "require-dev": {
@@ -21,8 +21,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Marmelab\\Silex\\Provider\\Silrest\\": "src/",
-            "Marmelab\\Silex\\Provider\\SilrestTest\\": "tests/"
+            "Marmelab\\Silrest\\": "src/",
+            "Marmelab\\SilrestTest\\": "tests/"
         }
     },
     "minimum-stability": "dev"

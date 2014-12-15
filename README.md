@@ -20,7 +20,7 @@ Add repositories to your silex project composer.json :
         "require": {
             "php": ">=5.4",
             "silex/silex": "~1.2",
-            "alexisjanvier/silrest": "dev-master"
+            "marmlelab/silrest": "dev-master"
         }
     }
 
@@ -33,7 +33,7 @@ Then, register Doctrine and Silrest in your application ;
             'path'     => __DIR__.'/app.db',
         ),
     ));
-    $app->register(new Marmelab\Silex\Provider\Silrest\RestApiProvider(), array(
+    $app->register(new Marmelab\Silrest\RestApiProvider(), array(
         'rest_api.config_file' => __DIR__ . '/api.raml',
         'rest_api.url_prefixe' => 'api',
     ));

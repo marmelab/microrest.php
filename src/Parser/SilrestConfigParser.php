@@ -1,6 +1,6 @@
 <?php
 
-namespace Marmelab\Silex\Provider\Silrest\Parser;
+namespace Marmelab\Silrest\Parser;
 
 interface SilrestConfigParser
 {

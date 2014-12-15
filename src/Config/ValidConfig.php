@@ -1,8 +1,8 @@
 <?php
 
-namespace Marmelab\Silex\Provider\Silrest\Config;
+namespace Marmelab\Silrest\Config;
 
-use Marmelab\Silex\Provider\Silrest\Parser\SilrestConfigParser;
+use Marmelab\Silrest\Parser\SilrestConfigParser;
 
 class ValidConfig
 {
@@ -18,6 +18,6 @@ class ValidConfig
 
     public function getConfig()
     {
-        return $this->config;
+        return $this->config->getResourcesAsUri()->getRoutes();
     }
 }

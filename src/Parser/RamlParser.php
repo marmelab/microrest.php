@@ -3,9 +3,9 @@
  * Simple port of Raml Parser to make it implement SilrestConfigParser
  */
 
-namespace Marmelab\Silex\Provider\Silrest\Parser;
+namespace Marmelab\Silrest\Parser;
 
-use Marmelab\Silex\Provider\Silrest\Parser\SilrestConfigParser;
+use Marmelab\Silrest\Parser\SilrestConfigParser;
 use Raml\Parser;
 
 class RamlParser implements SilrestConfigParser

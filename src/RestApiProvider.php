@@ -1,6 +1,6 @@
 <?php
 
-namespace Marmelab\Silex\Provider\Silrest;
+namespace Marmelab\Silrest;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
