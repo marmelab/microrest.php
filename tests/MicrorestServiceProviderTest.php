@@ -1,8 +1,8 @@
 <?php
 
-namespace Marmelab\Silex\Provider\SilrestTest;
+namespace Marmelab\Microrest\MicrorestServiceTest;
 
-class RestApiProviderTest extends \PHPUnit_Framework_TestCase
+class MicrorestServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function testItShouldBeTested()
     {

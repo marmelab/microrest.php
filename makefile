@@ -1,4 +1,4 @@
+.PHONY: test
+
 test:
 	phpunit
-
-.PHONY: test
