@@ -55,12 +55,11 @@ Run the tests suite with the following commands:
 
 You can find a complete demo application in `examples/ng-admin`.
 
-It's just a few commands to setup:
+It's just 2 commands for setup and run:
 
-    cd examples/ng-admin
-    make install
-    make run
+    make install-demo
+    make run-demo
 
-You can play with the Silex demo API at the url: `http://localhost:8888/api`
+Play with the Silex demo API at the url: `http://localhost:8888/api`
 
-You can explore the API using [ng-admin](https://github.com/marmelab/ng-admin) backend administration at the url: `http://localhost:8888/admin`
+Explore the API using [ng-admin](https://github.com/marmelab/ng-admin) backend administration at the url: `http://localhost:8888/admin`
