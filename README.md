@@ -2,7 +2,7 @@
 
 Marmelab Microrest is a Silex provider to setting up a REST API from a RAML configuration file.
 
-## What is Raml
+## What is RAML ?
 
 [RESTful API Modeling Language (RAML)](http://raml.org/) is a simple and succinct way of describing practically-RESTful APIs. It encourages reuse, enables discovery and pattern-sharing, and aims for merit-based emergence of best practices.    
 You should easely set up a RAML file from [API Designer](http://api-portal.anypoint.mulesoft.com/raml/api-designer).     
@@ -46,5 +46,21 @@ Then, you should browse your new API REST on your `domain/api.url_prefix` previo
 
 ## Tests
 
+Run the tests suite with the following commands:
+
+    make install
     make test
 
+## Demo
+
+You can find a complete demo application in `examples/ng-admin`.
+
+It's just a few commands to setup:
+
+    cd examples/ng-admin
+    make install
+    make run
+
+You can play with the Silex demo API at the url: `http://localhost:8888/api`
+
+You can explore the API using [ng-admin](https://github.com/marmelab/ng-admin) backend administration at the url: `http://localhost:8888/admin`

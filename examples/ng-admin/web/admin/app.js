@@ -35,45 +35,166 @@
             };
         }
 
-        var app = new Application('ng-admin backend demo') // application main title
-            .baseApiUrl('http://localhost:8888/api'); // main API endpoint
+        var app = new Application('Microrest demo')
+            .baseApiUrl('http://localhost:8888/api');
 
-        // define all entities at the top to allow references between them
-        var post = new Entity('posts'); // the API endpoint for posts will be http://localhost:3000/posts/:id
+        var post = new Entity('posts');
 
-        // set the application entities
+        var comment = new Entity('comments');
+
+        var tag = new Entity('tags')
+            .readOnly();
+
         app
-            .addEntity(post);
+            .addEntity(post)
+            .addEntity(tag)
+            .addEntity(comment);
 
-        // customize entities and views
+        // post
         post.dashboardView()
             .title('Recent posts')
-            .order(1) // display the post panel first in the dashboard
-            .limit(5) // limit the panel to the 5 latest posts
-            .pagination(pagination) // use the custom pagination function to format the API request correctly
+            .order(1)
+            .limit(5)
+            .pagination(pagination)
             .addField(new Field('title').isDetailLink(true).map(truncate));
 
         post.listView()
-            .title('All posts') // default title is "[Entity_name] list"
+            .title('All posts')
             .pagination(pagination)
             .addField(new Field('id').label('ID'))
-            .addField(new Field('title')) // the default list field type is "string", and displays as a string
+            .addField(new Field('title'))
             .listActions(['show', 'edit', 'delete']);
 
-        post.showView() // a showView displays one entry in full page - allows to display more data than in a a list
+        post.showView()
             .addField(new Field('id'))
             .addField(new Field('title'))
-            .addField(new Field('body').type('wysiwyg'));
+            .addField(new Field('body').type('wysiwyg'))
+            .addField(new ReferencedList('comments')
+                .targetEntity(comment)
+                .targetReferenceField('post_id')
+                .targetFields([
+                    new Field('id'),
+                    new Field('body').label('Comment')
+                ])
+            );
 
         post.creationView()
-            .addField(new Field('title')) // the default edit field type is "string", and displays as a text input
-            .addField(new Field('body').type('wysiwyg')) // overriding the type allows rich text editing for the body
+            .addField(new Field('title'))
+            .addField(new Field('body').type('wysiwyg'))
 
         post.editionView()
-            .title('Edit post "{{ entry.values.title }}"') // title() accepts a template string, which has access to the entry
-            .actions(['list', 'show', 'delete']) // choose which buttons appear in the action bar
+            .title('Edit post "{{ entry.values.title }}"')
+            .actions(['list', 'show', 'delete'])
             .addField(new Field('title'))
-            .addField(new Field('body').type('wysiwyg'));
+            .addField(new Field('body').type('wysiwyg'))
+            .addField(new ReferencedList('comments')
+                .targetEntity(comment)
+                .targetReferenceField('post_id')
+                .targetFields([
+                    new Field('id'),
+                    new Field('body').label('Comment')
+                ])
+            );
+
+        // comment
+        comment.dashboardView()
+            .title('Last comments')
+            .order(2)
+            .limit(5)
+            .pagination(pagination)
+            .addField(new Field('id'))
+            .addField(new Field('body').label('Comment').map(truncate))
+            .addField(new Field()
+                .type('template')
+                .label('Actions')
+                .template(function () {
+                    return '<custom-post-link></custom-post-link>';
+                })
+            );
+
+        comment.listView()
+            .title('Comments')
+            .description('List of all comments with an infinite pagination')
+            .pagination(pagination)
+            .addField(new Field('id').label('ID'))
+            .addField(new Reference('post_id')
+                .label('Post title')
+                .map(truncate)
+                .targetEntity(post)
+                .targetField(new Field('title'))
+            )
+            .addField(new Field('body').map(truncate))
+            .addField(new Field('created_at').label('Creation date').type('date'))
+            .addQuickFilter('Today', function () {
+                var now = new Date(),
+                    year = now.getFullYear(),
+                    month = now.getMonth() + 1,
+                    day = now.getDate();
+                month = month < 10 ? '0' + month : month;
+                day = day < 10 ? '0' + day : day;
+                return {
+                    created_at: [year, month, day].join('-')
+                };
+            });
+
+        comment.creationView()
+            .addField(new Reference('post_id')
+                .label('Post title')
+                .map(truncate)
+                .targetEntity(post)
+                .targetField(new Field('title'))
+            )
+            .addField(new Field('body').type('wysiwyg'))
+            .addField(new Field('created_at')
+                .label('Creation date')
+                .type('date')
+                .defaultValue(new Date())
+            );
+
+        comment.editionView()
+            .addField(new Reference('post_id')
+                .label('Post title')
+                .map(truncate)
+                .targetEntity(post)
+                .targetField(new Field('title'))
+            )
+            .addField(new Field('body').type('wysiwyg'))
+            .addField(new Field('created_at').label('Creation date').type('date'))
+            .addField(new Field()
+                .type('template')
+                .label('Actions')
+                .template('<custom-post-link></custom-post-link>')
+            );
+
+        comment.deletionView()
+            .title('Deletion confirmation');
+
+        // tag
+        tag.dashboardView()
+            .title('Recent tags')
+            .order(3)
+            .limit(10)
+            .pagination(pagination)
+            .addField(new Field('id').label('ID'))
+            .addField(new Field('name'))
+            .addField(new Field('published').label('Is published ?').type('boolean'));
+
+        tag.listView()
+            .infinitePagination(false)
+            .pagination(pagination)
+            .addField(new Field('id').label('ID'))
+            .addField(new Field('name'))
+            .addField(new Field('published').type('boolean'))
+            .addField(new Field('custom')
+                .type('template')
+                .label('Upper name')
+                .template('{{ entry.values.name.toUpperCase() }}')
+            )
+            .listActions(['show']);
+
+        tag.showView()
+            .addField(new Field('name'))
+            .addField(new Field('published').type('boolean'));
 
         NgAdminConfigurationProvider.configure(app);
     });
