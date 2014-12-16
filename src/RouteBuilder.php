@@ -3,17 +3,29 @@
 namespace Marmelab\Microrest;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class RouteBuilder
 {
-    private static $validMethod = array ('get', 'post', 'put', 'patch', 'delete');
+    private static $validMethods = array('GET', 'POST', 'PUT', 'PATCH', 'DELETE');
 
-    public function build($controllers, array $routes, $controllerService)
+    public function build($controllers, array $routes, $controllerService, $contentType = 'application/json')
     {
         $availableRoutes = array();
+        $beforeMiddleware = function (Request $request, Application $app) use ($contentType) {
+            if (0 === strpos($request->headers->get('Content-Type'), $contentType)) {
+                $data = json_decode($request->getContent(), true);
+                $request->request->replace(is_array($data) ? $data : array());
+            }
+        };
+        $afterMiddleware = function (Request $request, Response $response, Application $app) use ($contentType) {
+            $request->headers->set('Content-Type', $contentType);
+            $request->headers->set('Accept', $contentType);
+        };
 
         foreach ($routes as $index => $route) {
-            if (!in_array(strtolower($route['method']), self::$validMethod)) {
+            if (!in_array($route['method'], self::$validMethods)) {
                 continue;
             }
 
@@ -29,20 +41,24 @@ class RouteBuilder
             }
 
             $action = $controllerService.':'.strtolower($route['method']).$route['type'].'Action';
-            $name = 'microrest.'.strtolower($route['method']).$route['objectType'].$route['type'];
+            $name = 'microrest.'.strtolower($route['method']).ucfirst($route['objectType']).$route['type'];
 
             $controllers
                 ->match($route['path'], $action)
                 ->method($route['method'])
                 ->setDefault('objectType', $route['objectType'])
                 ->bind($name)
+                ->before($beforeMiddleware)
+                ->after($afterMiddleware)
             ;
         }
 
         $controllers->match('/', $controllerService.':homeAction')
             ->method('GET')
             ->setDefault('availableRoutes', $availableRoutes)
-            ->bind('microrest.home');
+            ->bind('microrest.home')
+            ->after($afterMiddleware)
+        ;
 
         return $controllers;
     }
