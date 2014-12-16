@@ -22,7 +22,7 @@ Add repositories to your silex project `composer.json`:
         "require": {
             "php": ">=5.4",
             "silex/silex": "~1.2",
-            "marmlelab/microrest": "dev-master"
+            "marmlelab/microrest": "~1.0@dev"
         }
     }
 
