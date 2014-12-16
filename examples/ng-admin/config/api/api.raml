@@ -1,0 +1,91 @@
+#%RAML 0.8
+title: microrest.php Example API
+version: v1
+baseUri: http://localhost:8888/api
+mediaType: application/json
+resourceTypes: 
+  - collection:
+    usage: This resourceType should be used for any collection of items
+    description: The collection of <<resourcePathName>>
+    get:
+      description: Get all <<resourcePathName>>, optionally filtered
+    post:
+      description: Create a new <<resourcePathName | !singularize>>
+traits:
+  - paginated:
+    queryParameters:
+      pages:
+        description: Pagination
+        type: number
+      size:
+        description: Size of pagination.
+        type: number
+      sort:
+        description: Sort (asc or desc).
+        type: string
+/posts:
+  displayName: Posts
+  get:
+    description: Retrieves one or more posts.
+    is: [paginated]
+    responses:
+      200:
+  post:
+    description: Creates one or more posts.
+    responses:
+      201:
+  /{id}:
+    get:
+      description: Retrieves one or more posts.
+      responses:
+        200:
+    put:
+      description: Updates one or more posts.
+      responses:
+        204:
+    delete:
+      description: Deletes one or more posts.
+/tags:
+  displayName: Tags
+  get:
+    description: Retrieves one or more tags.
+    is: [paginated]
+    responses:
+      200:
+  post:
+    description: Creates one or more tags.
+    responses:
+      201:
+  /{id}:
+    get:
+      description: Retrieves one or more tags.
+      responses:
+        200:
+    put:
+      description: Updates one or more tags.
+      responses:
+        204:
+    delete:
+      description: Deletes one or more tags.
+/comments:
+  displayName: Comments
+  get:
+    description: Retrieves one or more comments.
+    is: [paginated]
+    responses:
+      200:
+  post:
+    description: Creates one or more comments.
+    responses:
+      201:
+  /{id}:
+    get:
+      description: Retrieves one or more comments.
+      responses:
+        200:
+    put:
+      description: Updates one or more comments.
+      responses:
+        204:
+    delete:
+      description: Deletes one or more comments.

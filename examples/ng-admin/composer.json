@@ -1,0 +1,38 @@
+{
+    "name": "fabpot/silex-skeleton",
+    "description": "A pre-configured skeleton for the Silex microframework",
+    "license": "MIT",
+    "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:marmelab/microrest.php.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "silex/silex": "~1.0@dev",
+        "silex/web-profiler": "~1.0",
+        "jeromemacias/silex-debug": "~1.0@dev",
+        "symfony/debug": "~2.6",
+        "symfony/monolog-bridge": "~2.6",
+        "symfony/twig-bridge": "~2.6",
+        "doctrine/dbal": "~2.5",
+        "jdesrosiers/silex-cors-provider": "~0.1",
+        "marmelab/microrest": "dev-master",
+        "symfony/config": "~2.6"
+    },
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "config": {
+        "bin-dir": "bin",
+        "process-timeout": 0
+    },
+    "scripts": {
+        "run": [
+            "echo 'Started web server on http://localhost:8888'",
+            "php -S localhost:8888 -t web/ web/index_dev.php"
+        ]
+    }
+}
