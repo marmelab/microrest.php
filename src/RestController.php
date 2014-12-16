@@ -3,6 +3,8 @@
 namespace Marmelab\Microrest;
 
 use Doctrine\DBAL\Connection;
+use Pagerfanta\Adapter\DoctrineDbalAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,15 +23,37 @@ class RestController
         return new JsonResponse($availableRoutes);
     }
 
-    public function getListAction($objectType)
+    public function getListAction($objectType, Request $request)
     {
-        try {
-            $objects = $this->dbal->fetchAll('SELECT * FROM '.$objectType);
-        } catch (\Exception $e) {
-            $objects = array('error' => $e->getMessage());
+        $queryBuilder = $this->dbal
+            ->createQueryBuilder()
+            ->select('o.*')
+            ->from($objectType, 'o')
+        ;
+
+        if ($sort = $request->query->get('_sort')) {
+            $queryBuilder->orderBy($sort, $request->query->get('_sortDir', 'ASC'));
         }
 
-        return new JsonResponse($objects);
+        $countQueryBuilderModifier = function ($queryBuilder) {
+            $queryBuilder
+                ->select('COUNT(DISTINCT o.id) AS total_results')
+                ->setMaxResults(1)
+            ;
+        };
+
+        $pager = new DoctrineDbalAdapter($queryBuilder, $countQueryBuilderModifier);
+
+        try {
+            $nbResults = $pager->getNbResults();
+            $results = $pager->getSlice($request->query->get('_start', 0), $request->query->get('_end', 20));
+        } catch (\Exception $e) {
+            $results = array('error' => $e->getMessage());
+        }
+
+        return new JsonResponse($results, 200, array(
+            'X-Total-Count' => $nbResults,
+        ));
     }
 
     public function postListAction($objectType, Request $request)

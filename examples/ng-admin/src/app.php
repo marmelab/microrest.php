@@ -18,7 +18,8 @@ $app->register(new MicrorestServiceProvider(), array(
 ));
 
 $app->register(new CorsServiceProvider(), array(
-    "cors.allowOrigin" => "http://localhost:8000",
+    'cors.allowOrigin' => 'http://localhost:8000',
+    'cors.exposeHeaders' => 'X-Total-Count',
 ));
 
 $app->after($app['cors']);
