@@ -3,6 +3,12 @@
     "description": "A pre-configured skeleton for the Silex microframework",
     "license": "MIT",
     "type": "project",
+    "authors": [
+        {
+            "name": "Jérôme Macias",
+            "email": "jerome@marmelab.com"
+        }
+    ],
     "repositories": [
         {
             "type": "vcs",
@@ -19,7 +25,7 @@
         "symfony/twig-bridge": "~2.6",
         "doctrine/dbal": "~2.5",
         "jdesrosiers/silex-cors-provider": "~0.1",
-        "marmelab/microrest": "dev-master",
+        "marmelab/microrest": "~1.0@dev",
         "symfony/config": "~2.6"
     },
     "autoload": {

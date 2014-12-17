@@ -6,6 +6,10 @@
         {
             "name": "alexis",
             "email": "alexis@marmelab.com"
+        },
+        {
+            "name": "Jérôme Macias",
+            "email": "jerome@marmelab.com"
         }
     ],
     "require": {
