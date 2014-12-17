@@ -10,18 +10,17 @@ class RouteBuilder
 {
     private static $validMethods = array('GET', 'POST', 'PUT', 'PATCH', 'DELETE');
 
-    public function build($controllers, array $routes, $controllerService, $contentType = 'application/json')
+    public function build($controllers, array $routes, $controllerService)
     {
         $availableRoutes = array();
-        $beforeMiddleware = function (Request $request, Application $app) use ($contentType) {
-            if (0 === strpos($request->headers->get('Content-Type'), $contentType)) {
+        $beforeMiddleware = function (Request $request, Application $app) {
+            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
                 $data = json_decode($request->getContent(), true);
                 $request->request->replace(is_array($data) ? $data : array());
             }
         };
-        $afterMiddleware = function (Request $request, Response $response, Application $app) use ($contentType) {
-            $request->headers->set('Content-Type', $contentType);
-            $request->headers->set('Accept', $contentType);
+        $afterMiddleware = function (Request $request, Response $response, Application $app) {
+            $response->headers->set('Content-Type', 'application/json');
         };
 
         foreach ($routes as $index => $route) {

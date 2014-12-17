@@ -63,7 +63,8 @@
             .pagination(pagination)
             .addField(new Field('id').label('ID'))
             .addField(new Field('title'))
-            .listActions(['show', 'edit', 'delete']);
+            .listActions(['show', 'edit', 'delete'])
+            .filterQuery(false);
 
         post.showView()
             .addField(new Field('id'))
@@ -125,17 +126,7 @@
             )
             .addField(new Field('body').map(truncate))
             .addField(new Field('created_at').label('Creation date').type('date'))
-            .addQuickFilter('Today', function () {
-                var now = new Date(),
-                    year = now.getFullYear(),
-                    month = now.getMonth() + 1,
-                    day = now.getDate();
-                month = month < 10 ? '0' + month : month;
-                day = day < 10 ? '0' + day : day;
-                return {
-                    created_at: [year, month, day].join('-')
-                };
-            });
+            .filterQuery(false);
 
         comment.creationView()
             .addField(new Reference('post_id')
@@ -190,7 +181,8 @@
                 .label('Upper name')
                 .template('{{ entry.values.name.toUpperCase() }}')
             )
-            .listActions(['show']);
+            .listActions(['show'])
+            .filterQuery(false);
 
         tag.showView()
             .addField(new Field('name'))

@@ -44,12 +44,8 @@ class RestController
 
         $pager = new DoctrineDbalAdapter($queryBuilder, $countQueryBuilderModifier);
 
-        try {
-            $nbResults = $pager->getNbResults();
-            $results = $pager->getSlice($request->query->get('_start', 0), $request->query->get('_end', 20));
-        } catch (\Exception $e) {
-            $results = array('error' => $e->getMessage());
-        }
+        $nbResults = $pager->getNbResults();
+        $results = $pager->getSlice($request->query->get('_start', 0), $request->query->get('_end', 20));
 
         return new JsonResponse($results, 200, array(
             'X-Total-Count' => $nbResults,
@@ -58,8 +54,15 @@ class RestController
 
     public function postListAction($objectType, Request $request)
     {
-        $this->dbal->insert($objectType, $request->request->all());
-        $id = $this->dbal->lastInsertId();
+        try {
+            $this->dbal->insert($objectType, $request->request->all());
+        } catch (\Exception $e) {
+            return new JsonResponse(array(
+                'errors' => array('detail' => $e->getMessage()),
+            ));
+        }
+
+        $id = (integer) $this->dbal->lastInsertId();
 
         return $this->getObjectResponse($objectType, $id, 201);
     }
@@ -71,27 +74,41 @@ class RestController
 
     public function putObjectAction($objectId, $objectType, Request $request)
     {
-        $id = $request->request->get('id');
-        $request->request->remove('id');
         $data = $request->request->all();
+        $request->request->remove('id');
 
-        $this->dbal->update($objectType, $data, array('id' => $id));
+        $result = $this->dbal->update($objectType, $data, array('id' => $objectId));
+        if (0 === $result) {
+            return new Response('', 404);
+        }
 
-        return $this->getObjectResponse($objectType, $id);
+        return $this->getObjectResponse($objectType, $objectId);
     }
 
     public function deleteObjectAction($objectId, $objectType)
     {
-        $this->dbal->delete($objectType, array('id' => $objectId));
+        $result = $this->dbal->delete($objectType, array('id' => $objectId));
+        if (0 === $result) {
+            return new Response('', 404);
+        }
 
         return new JsonResponse('', 204);
     }
 
     private function getObjectResponse($name, $id, $status = 200)
     {
-        $sql = "SELECT * FROM $name WHERE id = ?";
-        $object = $this->dbal->fetchAssoc($sql, array((int) $id));
+        $queryBuilder = $this->dbal->createQueryBuilder();
+        $query = $queryBuilder
+            ->select('*')
+            ->from($name)
+            ->where('id = '.$queryBuilder->createPositionalParameter($id))
+        ;
 
-        return new Response(json_encode($object), $status);
+        $result = $query->execute()->fetchObject();
+        if (false === $result) {
+            return new Response('', 404);
+        }
+
+        return new JsonResponse($result, $status);
     }
 }
