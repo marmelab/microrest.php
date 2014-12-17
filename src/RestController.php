@@ -59,7 +59,7 @@ class RestController
         } catch (\Exception $e) {
             return new JsonResponse(array(
                 'errors' => array('detail' => $e->getMessage()),
-            ));
+            ), 400);
         }
 
         $id = (integer) $this->dbal->lastInsertId();

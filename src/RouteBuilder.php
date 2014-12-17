@@ -14,16 +14,19 @@ class RouteBuilder
     {
         $availableRoutes = array();
         $beforeMiddleware = function (Request $request, Application $app) {
-            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            if (0 === strpos($request->headers->get('Content-Type'), $app['microrest.mediaType'])) {
                 $data = json_decode($request->getContent(), true);
                 $request->request->replace(is_array($data) ? $data : array());
             }
         };
         $afterMiddleware = function (Request $request, Response $response, Application $app) {
-            $response->headers->set('Content-Type', 'application/json');
+            $response->headers->set('Content-Type', $app['microrest.mediaType']);
         };
 
         foreach ($routes as $index => $route) {
+            $route['method'] = $route['type'];
+            unset($route['type']);
+
             if (!in_array($route['method'], self::$validMethods)) {
                 continue;
             }

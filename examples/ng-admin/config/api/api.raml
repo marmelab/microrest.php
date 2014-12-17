@@ -1,33 +1,12 @@
 #%RAML 0.8
 title: microrest.php Example API
 version: v1
-baseUri: http://localhost:8888/api
+baseUrl: http://localhost:8888/api
 mediaType: application/json
-resourceTypes: 
-  - collection:
-    usage: This resourceType should be used for any collection of items
-    description: The collection of <<resourcePathName>>
-    get:
-      description: Get all <<resourcePathName>>, optionally filtered
-    post:
-      description: Create a new <<resourcePathName | !singularize>>
-traits:
-  - paginated:
-    queryParameters:
-      pages:
-        description: Pagination
-        type: number
-      size:
-        description: Size of pagination.
-        type: number
-      sort:
-        description: Sort (asc or desc).
-        type: string
 /posts:
   displayName: Posts
   get:
     description: Retrieves one or more posts.
-    is: [paginated]
     responses:
       200:
   post:
@@ -49,7 +28,6 @@ traits:
   displayName: Tags
   get:
     description: Retrieves one or more tags.
-    is: [paginated]
     responses:
       200:
   post:
@@ -71,7 +49,6 @@ traits:
   displayName: Comments
   get:
     description: Retrieves one or more comments.
-    is: [paginated]
     responses:
       200:
   post:

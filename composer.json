@@ -14,7 +14,7 @@
     ],
     "require": {
         "silex/silex": "~1.2",
-        "alecsammon/php-raml-parser": "~0.6",
+        "alecsammon/php-raml-parser": "~1.0@dev",
         "doctrine/dbal": "~2.4",
         "pagerfanta/pagerfanta": "~1.0"
     },

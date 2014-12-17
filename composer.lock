@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4b7aac3aaabebe50131988d6ecc825f9",
+    "hash": "c373810d719971727a41f413854b395b",
     "packages": [
         {
             "name": "alecsammon/php-raml-parser",
-            "version": "0.6.1",
+            "version": "1.0.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecsammon/php-raml-parser.git",
-                "reference": "1a936944035d7d933099bf4e2478dd98dba9791d"
+                "reference": "a702f90a4bf7666274aa5fc19f6344b488843368"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecsammon/php-raml-parser/zipball/1a936944035d7d933099bf4e2478dd98dba9791d",
-                "reference": "1a936944035d7d933099bf4e2478dd98dba9791d",
+                "url": "https://api.github.com/repos/alecsammon/php-raml-parser/zipball/a702f90a4bf7666274aa5fc19f6344b488843368",
+                "reference": "a702f90a4bf7666274aa5fc19f6344b488843368",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
             ],
             "description": "A RAML parser built in php",
             "homepage": "https://github.com/alecsammon/php-raml-parser",
-            "time": "2014-12-12 16:05:05"
+            "time": "2014-12-17 14:51:10"
         },
         {
             "name": "doctrine/annotations",
@@ -2083,7 +2083,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "alecsammon/php-raml-parser": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
