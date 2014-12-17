@@ -9,24 +9,11 @@ You should easely set up a RAML file from [API Designer](http://api-portal.anypo
 
 ## Installation
 
-Add repositories to your silex project `composer.json`:
+To install this library, run the command below and you will get the latest version:
 
-    {
-        "name": "your project",
-        "repositories": [
-            {
-                "type": "vcs",
-                "url":  "git@github.com:marmelab/microrest.php.git"
-            }
-        ],
-        "require": {
-            "php": ">=5.4",
-            "silex/silex": "~1.2",
-            "marmlelab/microrest": "~1.0@dev"
-        }
-    }
+    composer require marmelab/microrest "~1.0@dev"
 
-Then, register Doctrine and Microrest in your application:
+And enable `ServiceController`, `Doctrine` and `Microrest` service provider in your application:
 
     $app->register(new Silex\Provider\ServiceControllerServiceProvider());
     $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
@@ -37,12 +24,11 @@ Then, register Doctrine and Microrest in your application:
     ));
     $app->register(new Marmelab\Microrest\MicrorestServiceProvider(), array(
         'microrest.config_file' => __DIR__ . '/api.raml',
-        'microrest.url_prefix' => 'api', // This is the default value
     ));
   
-You need to give the path to the `raml` file describing your API. You can find an example into the `tests/fixtures` directory.
+You need to give the path to the `RAML` file describing your API. You can find an example into the `tests/fixtures` directory.
 
-Then, you should browse your new API REST on your `domain/api.url_prefix` previously set the Silex provider registration.
+Then, you should browse your new API REST on the url defined in the `baseUrl` configuration of your `RAML` api file.
 
 ## Tests
 
@@ -55,7 +41,7 @@ Run the tests suite with the following commands:
 
 You can find a complete demo application in `examples/ng-admin`.
 
-It's just 2 commands for setup and run:
+It's just 2 commands for installation and run:
 
     make install-demo
     make run-demo

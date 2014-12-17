@@ -14,7 +14,6 @@ $app->register(new ServiceControllerServiceProvider());
 
 $app->register(new MicrorestServiceProvider(), array(
     'microrest.config_file' => __DIR__ . '/../config/api/api.raml',
-    'microrest.url_prefix' => 'api',
 ));
 
 $app->register(new CorsServiceProvider(), array(
