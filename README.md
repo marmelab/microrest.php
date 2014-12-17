@@ -7,7 +7,7 @@ Marmelab Microrest is a Silex provider to setting up a REST API from a RAML conf
 [RESTful API Modeling Language (RAML)](http://raml.org/) is a simple and succinct way of describing practically-RESTful APIs. It encourages reuse, enables discovery and pattern-sharing, and aims for merit-based emergence of best practices.    
 You should easely set up a RAML file from [API Designer](http://api-portal.anypoint.mulesoft.com/raml/api-designer).     
 
-## Setup
+## Installation
 
 Add repositories to your silex project `composer.json`:
 
