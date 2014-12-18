@@ -9,6 +9,8 @@ before_script:
 
 script: vendor/bin/phpunit
 
+sudo: false # use Docker in Travis, see http://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure/
+
 php:
   - 5.4
   - 5.5
