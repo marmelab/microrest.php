@@ -12,20 +12,24 @@ You can easily set up a RAML file from [API Designer](http://api-portal.anypoint
 
 To install microrest.php library, run the command below and you will get the latest version:
 
-    composer require marmelab/microrest "~1.0@dev"
+```bash
+composer require marmelab/microrest "~1.0@dev"
+```
 
 Enable `ServiceController`, `Doctrine` and `Microrest` service providers in your application:
 
-    $app->register(new Silex\Provider\ServiceControllerServiceProvider());
-    $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
-        'db.options' => array(
-            'driver'   => 'pdo_sqlite',
-            'path'     => __DIR__.'/app.db',
-        ),
-    ));
-    $app->register(new Marmelab\Microrest\MicrorestServiceProvider(), array(
-        'microrest.config_file' => __DIR__ . '/api.raml',
-    ));
+```php
+$app->register(new Silex\Provider\ServiceControllerServiceProvider());
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'db.options' => array(
+        'driver'   => 'pdo_sqlite',
+        'path'     => __DIR__.'/app.db',
+    ),
+));
+$app->register(new Marmelab\Microrest\MicrorestServiceProvider(), array(
+    'microrest.config_file' => __DIR__ . '/api.raml',
+));
+```
   
 You need to give the path to the `RAML` file describing your API. You can find an example into the `tests/fixtures` directory.
 
@@ -35,15 +39,19 @@ Then, browse your new API REST on the url defined in the `baseUrl` configuration
 
 Run the tests suite with the following commands:
 
-    make install
-    make test
+```bash
+make install
+make test
+```
 
 ## Demo
 
 You can find a complete demo application in `examples/ng-admin`. You just need 2 commands to install and run it:
 
-    make install-demo
-    make run-demo
+```bash
+make install-demo
+make run-demo
+```
 
 Play with the Silex demo API at the url: `http://localhost:8888/api`
 
@@ -51,4 +59,4 @@ Explore the API using [ng-admin](https://github.com/marmelab/ng-admin) backend a
 
 ## License
 
-microrest.php is licensed under the [MIT Licence](LICENSE), courtesy of [marmelab](http://marmelab.com).
+microrest.php is licensed under the [MIT License](LICENSE), courtesy of [marmelab](http://marmelab.com).
