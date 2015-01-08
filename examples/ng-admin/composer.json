@@ -1,6 +1,6 @@
 {
-    "name": "fabpot/silex-skeleton",
-    "description": "A pre-configured skeleton for the Silex microframework",
+    "name": "marmelab/microrest-example",
+    "description": "An example application using `marmelab/microrest`",
     "license": "MIT",
     "type": "project",
     "authors": [
@@ -12,21 +12,22 @@
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@github.com:marmelab/microrest.php.git"
+            "url": "git@github.com:marmelab/microrest.php.git"
         }
     ],
     "require": {
         "php": ">=5.3.3",
-        "silex/silex": "~1.0@dev",
-        "silex/web-profiler": "~1.0",
-        "jeromemacias/silex-debug": "~1.0@dev",
-        "symfony/debug": "~2.6",
-        "symfony/monolog-bridge": "~2.6",
-        "symfony/twig-bridge": "~2.6",
+        "ext-pdo_sqlite": "*",
         "doctrine/dbal": "~2.5",
         "jdesrosiers/silex-cors-provider": "~0.1",
+        "jeromemacias/silex-debug": "~1.0@dev",
         "marmelab/microrest": "~1.0@dev",
-        "symfony/config": "~2.6"
+        "silex/silex": "~1.0@dev",
+        "silex/web-profiler": "~1.0",
+        "symfony/config": "~2.6",
+        "symfony/debug": "~2.6",
+        "symfony/monolog-bridge": "~2.6",
+        "symfony/twig-bridge": "~2.6"
     },
     "autoload": {
         "psr-0": { "": "src/" }
