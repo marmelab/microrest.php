@@ -13,6 +13,7 @@
         }
     ],
     "require": {
+        "php": "~5.4.0",
         "silex/silex": "~1.2",
         "alecsammon/php-raml-parser": "1.0.0.x-dev",
         "doctrine/dbal": "~2.4",
