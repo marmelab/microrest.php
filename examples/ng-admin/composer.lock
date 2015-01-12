@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8cbcc114cea65f4e98c92e0e0a80b1a2",
+    "hash": "de95a73503835f676fe6123fad6c4bf0",
     "packages": [
         {
             "name": "alecsammon/php-raml-parser",
@@ -2077,14 +2077,15 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "silex/silex": 20,
         "jeromemacias/silex-debug": 20,
-        "marmelab/microrest": 20
+        "marmelab/microrest": 20,
+        "silex/silex": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "ext-pdo_sqlite": "*"
     },
     "platform-dev": []
 }
