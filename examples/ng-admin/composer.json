@@ -9,12 +9,6 @@
             "email": "jerome@marmelab.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:marmelab/microrest.php.git"
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
         "ext-pdo_sqlite": "*",
