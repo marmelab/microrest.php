@@ -1,9 +1,9 @@
 language: php
 
 before_script:
-  - composer install --dev --prefer-source
+  - make install
 
-script: vendor/bin/phpunit
+script: make test
 
 sudo: false # use Docker in Travis, see http://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure/
 

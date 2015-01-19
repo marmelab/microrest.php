@@ -37,6 +37,9 @@
         }
     },
     "scripts": {
-        "test": "phpunit"
+        "test": [
+            "cp tests/Fixtures/api.db-dist tests/Fixtures/api.db",
+            "phpunit"
+        ]
     }
 }

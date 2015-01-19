@@ -9,7 +9,7 @@ run-demo:
 	composer -d=examples/ng-admin run
 
 install:
-	composer install
+	composer install --dev --prefer-source
 
 test:
-	phpunit
+	composer test
