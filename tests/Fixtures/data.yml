@@ -1,0 +1,39 @@
+artists:
+  -
+    id: 1
+    name: "Daft Punk"
+    description: "French electronic music duo consisting of musicians Guy-Manuel de Homem-Christo and Thomas Bangalter"
+    image_url: "http://travelhymns.com/wp-content/uploads/2013/06/random-access-memories1.jpg"
+    nationality: "France"
+  -
+    id: 2
+    name: "Pink Floyd"
+    description: "English rock band that achieved international acclaim with their progressive and psychedelic music."
+    image_url: "http://www.billboard.com/files/styles/promo_650/public/stylus/1251869-pink-floyd-reunions-617-409.jpg"
+    nationality: "England"
+  -
+    id: 3
+    name: "Radiohead"
+    description: "English rock band from Abingdon, Oxfordshire, formed in 1985"
+    image_url: "http://www.billboard.com/files/styles/promo_650/public/stylus/1251869-pink-floyd-reunions-617-409.jpg"
+    nationality: "England"
+
+albums:
+  -
+    id: 1
+    artist_id: 1
+    name: "Random Access Memories"
+    image_url: "http://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
+    genre: "Electronict"
+  -
+    id: 2
+    artist_id: 3
+    name: "OK Computer"
+    image_url: "http://www.greenplastic.com/dev/wp-content/uploads/2010/12/ok-computer.jpg"
+    genre: "Alternative Rock"
+  -
+    id: 3
+    artist_id: 2
+    name: "The Dark Side of the Moon"
+    image_url: "http://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png"
+    genre: "Progressive Rock"
