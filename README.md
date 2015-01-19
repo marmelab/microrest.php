@@ -2,6 +2,8 @@
 
 Microrest is a Silex provider to setting up a REST API on top of a relational database, based on a YAML (RAML) configuration file.
 
+Check out the [launch post](http://marmelab.com/blog/2015/01/05/introducing-microrest-raml-api-in-silex.html).
+
 ## What is RAML ?
 
 [RESTful API Modeling Language (RAML)](http://raml.org/) is a simple and succinct way of describing practically-RESTful APIs. It encourages reuse, enables discovery and pattern-sharing, and aims for merit-based emergence of best practices.   
