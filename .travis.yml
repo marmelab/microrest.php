@@ -1,10 +1,6 @@
 language: php
 
-env:
-  - SILEX_VERSION="1.2.*"
-
 before_script:
-  - composer require silex/silex:${SILEX_VERSION}
   - composer install --dev --prefer-source
 
 script: vendor/bin/phpunit
