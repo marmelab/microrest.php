@@ -2,7 +2,6 @@
 
 use Silex\Provider\DebugServiceProvider;
 use Silex\Provider\MonologServiceProvider;
-use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\WebProfilerServiceProvider;
 
 // include the prod configuration
@@ -10,11 +9,6 @@ require __DIR__.'/prod.php';
 
 // enable the debug mode
 $app['debug'] = true;
-
-// twig for web profiler toolbar
-$app->register(new TwigServiceProvider(), array(
-    'twig.options' => array('cache' => __DIR__.'/../var/cache/twig'),
-));
 
 $app->register(new MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/../var/logs/silex_dev.log',
