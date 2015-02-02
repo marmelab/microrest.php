@@ -51,6 +51,7 @@ Request param | Description | Type / Example | Default
 `_strongFilter[]` | specify conjunction filter like a ````id` = 8 AND `post_id` = 2``` as request params array | `array` |
 `_searchOr[]` | specify search disjunction filter like a ````title` LIKE '%foo%' OR `post` LIKE '%bar%'``` | `array` |
 `_searchAnd[]` | specify search conjunction filter like a ````title` LIKE '%foo%' AND `post` LIKE '%bar%'``` | `array` |
+`_group` | set group part | `string` |
 
 You can combine one of `_strongFilter[]`, `_searchOr[]`, `_searchAnd[]` with `_sort`, `_sortDir`, `_fields`, `_start` and `_end` params
 
@@ -68,6 +69,7 @@ Query string | Description
 `/posts?_strongFilter[id]=8&_strongFilter[title]=foo` | you will receive a list of items where ````id` = 8 AND `title` = 'foo'```
 `/posts?_searchOr[title]=foo&_searchOr[body]=bar` | you will receive a list of items where ````title` LIKE '%foo%' OR `body` LIKE '%bar%'```
 `/posts?_searchAnd[title]=foo&_searchAnd[body]=bar` | you will receive a list of items where ````title` LIKE '%foo%' AND `body` LIKE '%bar%'```
+`/posts?_group=title` | should use for request distinct values of column instead
 `/posts?_searchAnd[title]=foo&_searchOr[body]=bar` | you will receive HTTP error `400 Bad request`
 
 ## Tests

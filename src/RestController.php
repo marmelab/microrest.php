@@ -133,6 +133,10 @@ class RestController
             }
         }
 
+        if ($group = $request->query->get('_group')) {
+            $queryBuilder->groupBy($group);
+        }
+
         if ($sort = $request->query->get('_sort')) {
             $queryBuilder->orderBy($sort, $request->query->get('_sortDir', 'ASC'));
         }
