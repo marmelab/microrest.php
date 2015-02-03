@@ -44,7 +44,7 @@ You can specify some get request parameters. For example:
 Request param | Description | Type / Example | Default
 --------------|--------------|--------------|--------------
 `_start` | specify start bound of selection | `number` | `0`
-`_end` | specify end bound of selection | `number` |`20` 
+`_end` | specify **length** of selection | `number` |`20` 
 `_sort` | specify key ordering | `string` |
 `_sortDir` | specify order direction | `ASC`, `DESC` | `ASC`
 `_fields` | specify comma separated set of fields in result set | `string` | `*`
@@ -63,7 +63,7 @@ You should use **only** one filer from
 
 Query string | Description
 -------------|------------
-`/posts?_start=10&_and=15` | you will receive a list from 10 till 15 position from result set
+`/posts?_start=10&_end=15` | you will receive a 15 posts from 10 position as result set
 `/posts?_sort=title&_sortDir=DESC` | you will receive a list sorted by `title` descending
 `/posts?_fields=id,title` | you will receive a list with `id` and `title` field in response
 `/posts?_strongFilter[id]=8&_strongFilter[title]=foo` | you will receive a list of items where ````id` = 8 AND `title` = 'foo'```
