@@ -36,6 +36,7 @@ class RestController
 
         $filterNames = array(
             '_strongFilter',
+            '_strongFilterIn',
             '_searchOr',
             '_searchAnd',
         );
@@ -115,6 +116,18 @@ class RestController
                         )
                     )
                     ->setParameter($searchOrKeyPrefix . $key, "%{$value}%");
+            }
+        }
+
+        if ($filters['_strongFilterIn']) {
+            foreach ($filters['_strongFilterIn'] as $key => $value) {
+                $queryBuilder
+                    ->andWhere(
+                        $queryBuilder->expr()->in(
+                            $key,
+                            explode(',', $value)
+                        )
+                    );
             }
         }
 

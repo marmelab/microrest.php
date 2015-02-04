@@ -49,15 +49,16 @@ Request param | Description | Type / Example | Default
 `_sortDir` | specify order direction | `ASC`, `DESC` | `ASC`
 `_fields` | specify comma separated set of fields in result set | `string` | `*`
 `_strongFilter[]` | specify conjunction filter like a ````id` = 8 AND `post_id` = 2``` as request params array | `array` |
+`_strongFilterIn[]` | specify `IN` condition like a ````id` IN (1,2,3)``` | array | 
 `_searchOr[]` | specify search disjunction filter like a ````title` LIKE '%foo%' OR `post` LIKE '%bar%'``` | `array` |
 `_searchAnd[]` | specify search conjunction filter like a ````title` LIKE '%foo%' AND `post` LIKE '%bar%'``` | `array` |
 `_group` | set group part | `string` |
 
-You can combine one of `_strongFilter[]`, `_searchOr[]`, `_searchAnd[]` with `_sort`, `_sortDir`, `_fields`, `_start` and `_end` params
+You can combine one of `_strongFilter[]`, `_strongFilterIn[]`, `_searchOr[]`, `_searchAnd[]` with `_sort`, `_sortDir`, `_fields`, `_start` and `_end` params
 
 #### Warning!
 You should use **only** one filer from 
-`_strongFilter[]`, `_searchOr[]`, `_searchAnd[]` or you will get an HTTP error `400 Bad request`.
+`_strongFilter[]`, `_strongFilterIn[]`, `_searchOr[]`, `_searchAnd[]` or you will get an HTTP error `400 Bad request`.
 
 ### Query string examples
 
@@ -67,6 +68,7 @@ Query string | Description
 `/posts?_sort=title&_sortDir=DESC` | you will receive a list sorted by `title` descending
 `/posts?_fields=id,title` | you will receive a list with `id` and `title` field in response
 `/posts?_strongFilter[id]=8&_strongFilter[title]=foo` | you will receive a list of items where ````id` = 8 AND `title` = 'foo'```
+`/posts?_strongFilterIn[id]=1,2,3` | you will receive a list of items with `id` in list: `1`, `2`, `3`
 `/posts?_searchOr[title]=foo&_searchOr[body]=bar` | you will receive a list of items where ````title` LIKE '%foo%' OR `body` LIKE '%bar%'```
 `/posts?_searchAnd[title]=foo&_searchAnd[body]=bar` | you will receive a list of items where ````title` LIKE '%foo%' AND `body` LIKE '%bar%'```
 `/posts?_group=title` | should use for request distinct values of column instead
