@@ -2,3 +2,5 @@
 /vendor/
 /web/admin/bower_components
 /app.db
+/web/css/microrest
+/web/js/microrest

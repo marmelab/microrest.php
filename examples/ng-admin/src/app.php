@@ -4,6 +4,7 @@ use JDesrosiers\Silex\Provider\CorsServiceProvider;
 use Marmelab\Microrest\MicrorestServiceProvider;
 use Silex\Application;
 use Silex\Provider\ServiceControllerServiceProvider;
+use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 
@@ -14,6 +15,10 @@ $app->register(new ServiceControllerServiceProvider());
 
 $app->register(new MicrorestServiceProvider(), array(
     'microrest.config_file' => __DIR__ . '/../config/api/api.raml',
+));
+
+$app->register(new TwigServiceProvider(), array(
+    'twig.options' => array('cache' => __DIR__.'/../var/cache/twig'),
 ));
 
 $app->register(new CorsServiceProvider(), array(

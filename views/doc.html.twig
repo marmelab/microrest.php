@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ apiName }}</title>
+        <link rel="stylesheet" href="/css/microrest/bootstrap.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <a href="#" class="navbar-brand">{{ apiName }}</a>
+            </div>
+        </nav>
+        <div class="container">
+            <div id="resources_container">
+            </div>
+            <h4 style="color: #999">[ 
+                <span style="font-variant: small-caps">base url</span>: {{ baseUrl }}, 
+                <span style="font-variant: small-caps">api version</span>: {{ version }}
+            ]</h4>
+        </div>
+        <script>
+        var data = JSON.parse('{{ resources | json_encode() | raw }}');
+        </script>
+        <script src="/js/microrest/react.js"></script>
+        <script src="/js/microrest/react-jsx-transformer.js"></script>
+        <script src="/js/microrest/react-bootstrap.js"></script>
+        <script type="text/jsx" src="/js/microrest/doc.js"></script>
+    </body>
+</html>

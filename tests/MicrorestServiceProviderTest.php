@@ -48,6 +48,7 @@ class MicrorestServiceProviderTest extends \PHPUnit_Extensions_Database_TestCase
             ),
         ));
         $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
+        $app->register(new \Silex\Provider\TwigServiceProvider());
         $app->register(new MicrorestServiceProvider(), array(
             'microrest.config_file' => __DIR__.'/Fixtures/api.rml',
         ));

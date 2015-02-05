@@ -31,6 +31,10 @@
         "process-timeout": 0
     },
     "scripts": {
+        "post-install-cmd": [
+            "ln -s ../../vendor/marmelab/microrest/web/css web/css/microrest",
+            "ln -s ../../vendor/marmelab/microrest/web/js web/js/microrest"
+        ],
         "run": [
             "echo 'Started web server on http://localhost:8888'",
             "php -S localhost:8888 -t web/ web/index_dev.php"
