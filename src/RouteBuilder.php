@@ -31,6 +31,10 @@ class RouteBuilder
                 continue;
             }
 
+            if (2 < substr_count($route['path'], '/')) { // only handle simple routes (/example or /example/{id})
+                continue;
+            }
+
             $availableRoutes[] = $index;
 
             if (preg_match('/{[\w-]+}/', $route['path'], $identifier)) {

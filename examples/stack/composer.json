@@ -1,0 +1,16 @@
+{
+    "name": "marmelab/microrest-stack-example",
+    "authors": [
+        {
+            "name": "Jérôme Macias",
+            "email": "jerome.macias@gmail.com"
+        }
+    ],
+    "require": {
+        "stack/builder": "^1.0",
+        "stack/run": "^1.0",
+        "marmelab/microrest": "dev-stackphp"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
