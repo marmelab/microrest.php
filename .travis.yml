@@ -1,13 +1,12 @@
 language: php
-
 before_script:
   - make install
-
 script: make test
-
 sudo: false # use Docker in Travis, see http://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure/
-
 php:
   - 5.4
   - 5.5
   - 5.6
+branches:
+  only:
+    - master
