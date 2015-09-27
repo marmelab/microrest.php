@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "76801bd03e031cc6e84e73d41cfc1aa4",
-    "content-hash": "26b483f24d3e4d19e547723518ec2f91",
+    "hash": "4ba6c0aae562d6354fbe2c2d9b0a4da2",
+    "content-hash": "c6f9e945b18cc433df9795b56336d8fc",
     "packages": [
         {
             "name": "alecsammon/php-raml-parser",
@@ -51,6 +51,49 @@
             "description": "A RAML parser built in php",
             "homepage": "https://github.com/alecsammon/php-raml-parser",
             "time": "2015-09-10 06:34:45"
+        },
+        {
+            "name": "asm89/stack-cors",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/asm89/stack-cors.git",
+                "reference": "1e9a842541e019b3b0869cc38763a502975db2fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/asm89/stack-cors/zipball/1e9a842541e019b3b0869cc38763a502975db2fd",
+                "reference": "1e9a842541e019b3b0869cc38763a502975db2fd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/http-foundation": "~2.1",
+                "symfony/http-kernel": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Asm89\\Stack": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander",
+                    "email": "iam.asm89@gmail.com"
+                }
+            ],
+            "description": "Cross-origin resource sharing library and stack middleware",
+            "homepage": "https://github.com/asm89/stack-cors",
+            "keywords": [
+                "cors",
+                "stack"
+            ],
+            "time": "2014-07-28 07:36:30"
         },
         {
             "name": "doctrine/annotations",
@@ -651,7 +694,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marmelab/microrest.php/zipball/080f8df637a4ff6fdd4728e3e30346d8f26c7af9",
+                "url": "https://api.github.com/repos/marmelab/microrest.php/zipball/ebeff83170d823df897e2e11562240c7f887bf02",
                 "reference": "080f8df637a4ff6fdd4728e3e30346d8f26c7af9",
                 "shasum": ""
             },
@@ -2352,7 +2395,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "marmelab/microrest": 20
+        "marmelab/microrest": 20,
+        "asm89/stack-cors": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

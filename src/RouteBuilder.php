@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RouteBuilder
 {
-    private static $validMethods = array('GET', 'POST', 'PUT', 'PATCH', 'DELETE');
+    public static $validMethods = array('GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS');
 
-    public function build($controllers, array $routes, $controllerService)
+    public function build($controllers, array $routes, $controllerService, $addOptionsRoute = false)
     {
         $availableRoutes = array();
         $beforeMiddleware = function (Request $request, Application $app) {
@@ -57,6 +57,15 @@ class RouteBuilder
                 ->before($beforeMiddleware)
                 ->after($afterMiddleware)
             ;
+
+            if ($addOptionsRoute) {
+                $controllers
+                    ->match($route['path'], function () use ($route) {
+                        return new Response('', 204, ['Allow' => [$route['method'], 'OPTIONS']]);
+                    })
+                    ->method('OPTIONS')
+                ;
+            }
         }
 
         $controllers->match('/', $controllerService.':homeAction')

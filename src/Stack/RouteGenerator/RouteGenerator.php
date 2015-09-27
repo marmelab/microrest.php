@@ -72,7 +72,7 @@ class RouteGenerator implements HttpKernelInterface
         });
 
         $controllers = (new RouteBuilder())
-            ->build($this->microrestApp['controllers_factory'], $routes, 'microrest.restController');
+            ->build($this->microrestApp['controllers_factory'], $routes, 'microrest.restController', true);
         $this->microrestApp['controllers']->mount($this->apiUrlPrefix, $controllers);
 
         $this->microrestApp->error(function(\Exception $e, $code) {

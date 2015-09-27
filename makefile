@@ -5,8 +5,11 @@ install-demo:
 	bower --config.cwd=./examples/ng-admin/web/admin install
 	cp examples/ng-admin/app.db-dist examples/ng-admin/app.db
 
-run-demo:
+demo-ng-admin:
 	composer -d=examples/ng-admin run
+
+demo-stack:
+    composer -d=examples/stack run
 
 install:
 	composer install --dev --prefer-source
