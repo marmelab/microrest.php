@@ -9,10 +9,16 @@
     "require": {
         "stack/builder": "^1.0",
         "stack/run": "^1.0",
+        "stack/url-map": "1.2.x-dev",
         "marmelab/microrest": "dev-stackphp",
-        "asm89/stack-cors": "dev-master"
+        "asm89/stack-cors": "dev-master",
+        "twig/twig": "~1.0"
     },
     "scripts": {
+        "post-install-cmd": [
+            "ln -s ../../vendor/marmelab/microrest/web/css css",
+            "ln -s ../../vendor/marmelab/microrest/web/js js"
+        ],
         "run": [
             "echo 'Started web server on http://localhost:8888'",
             "php -S localhost:8888"

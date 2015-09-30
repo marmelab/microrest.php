@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4ba6c0aae562d6354fbe2c2d9b0a4da2",
-    "content-hash": "c6f9e945b18cc433df9795b56336d8fc",
+    "hash": "4f26e33efbe9608c3a065f1724fd6c9f",
+    "content-hash": "ad9d9aaaae37c5ceb219fc0364eda9ae",
     "packages": [
         {
             "name": "alecsammon/php-raml-parser",
@@ -694,7 +694,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marmelab/microrest.php/zipball/ebeff83170d823df897e2e11562240c7f887bf02",
+                "url": "https://api.github.com/repos/marmelab/microrest.php/zipball/7e91a23b7a4ceb16530172b49179358bd47d779a",
                 "reference": "080f8df637a4ff6fdd4728e3e30346d8f26c7af9",
                 "shasum": ""
             },
@@ -2025,6 +2025,55 @@
             "time": "2013-10-25 14:31:28"
         },
         {
+            "name": "stack/url-map",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stackphp/url-map.git",
+                "reference": "0979bb2df3416ea65bcefe43bb251f53c5ca3559"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stackphp/url-map/zipball/0979bb2df3416ea65bcefe43bb251f53c5ca3559",
+                "reference": "0979bb2df3416ea65bcefe43bb251f53c5ca3559",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/http-foundation": "~2.1",
+                "symfony/http-kernel": "~2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7",
+                "silex/silex": "~1.0@dev",
+                "stack/builder": "~1.0@dev",
+                "stack/callable-http-kernel": "~1.0@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Stack\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Hochstrasser",
+                    "email": "christoph.hochstrasser@gmail.com"
+                }
+            ],
+            "description": "URL Map middleware.",
+            "time": "2015-04-16 21:17:12"
+        },
+        {
             "name": "symfony/debug",
             "version": "v2.7.5",
             "source": {
@@ -2389,12 +2438,74 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2015-09-14 14:14:09"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.22.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "79249fc8c9ff62e41e217e0c630e2e00bcadda6a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/79249fc8c9ff62e41e217e0c630e2e00bcadda6a",
+                "reference": "79249fc8c9ff62e41e217e0c630e2e00bcadda6a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.7"
+            },
+            "require-dev": {
+                "symfony/debug": "~2.7",
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.22-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Twig Team",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2015-09-22 13:59:32"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "stack/url-map": 20,
         "marmelab/microrest": 20,
         "asm89/stack-cors": 20
     },
