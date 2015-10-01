@@ -19,6 +19,12 @@ class MainApp implements HttpKernelInterface
 
 $mainApp = new MainApp();
 $stack = (new Stack\Builder())
+    ->push(Cors::class, [
+            'allowedHeaders' => ['x-total-count'],
+            'allowedMethods' => RouteBuilder::$validMethods,
+            'allowedOrigins' => ['*'],
+            'exposedHeaders' => true,
+            ])
     ->push(RamlConfig::class, [
         'path' => __DIR__.'/api.raml',
     ])
