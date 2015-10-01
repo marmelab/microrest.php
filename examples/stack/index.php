@@ -4,6 +4,7 @@ require_once __DIR__.'/vendor/autoload.php';
 use Asm89\Stack\Cors;
 use Marmelab\Microrest\Stack\RamlConfig\RamlConfig;
 use Marmelab\Microrest\Stack\RouteGenerator\RouteGenerator;
+use Marmelab\Microrest\Stack\DocGenerator\DocGenerator;
 use Marmelab\Microrest\RouteBuilder;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,13 +17,14 @@ class MainApp implements HttpKernelInterface
     }
 }
 
+$mainApp = new MainApp();
 $stack = (new Stack\Builder())
     ->push(Cors::class, [
-        'allowedHeaders' => ['x-total-count'],
-        'allowedMethods' => RouteBuilder::$validMethods,
-        'allowedOrigins' => ['*'],
-        'exposedHeaders' => true,
-    ])
+            'allowedHeaders' => ['x-total-count'],
+            'allowedMethods' => RouteBuilder::$validMethods,
+            'allowedOrigins' => ['*'],
+            'exposedHeaders' => true,
+            ])
     ->push(RamlConfig::class, [
         'path' => __DIR__.'/api.raml',
     ])
@@ -31,8 +33,11 @@ $stack = (new Stack\Builder())
             'driver' => 'pdo_sqlite',
             'path' => __DIR__.'/app.db',
         ],
+    ])
+    ->push('Stack\UrlMap', [
+        "/doc" => new DocGenerator($mainApp)
     ]);
 
-$app = $stack->resolve(new MainApp());
+$app = $stack->resolve($mainApp);
 
 Stack\run($app);
