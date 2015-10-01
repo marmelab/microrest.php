@@ -16,8 +16,9 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "ln -s ../../vendor/marmelab/microrest/web/css css",
-            "ln -s ../../vendor/marmelab/microrest/web/js js"
+            "cd css && ln -s ../vendor/marmelab/microrest/web/css microrest",
+            "cd js && ln -s ../vendor/marmelab/microrest/web/js microrest",
+            "cp app.db.dist app.db"
         ],
         "run": [
             "echo 'Started web server on http://localhost:8888'",
