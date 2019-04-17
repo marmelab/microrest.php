@@ -1,3 +1,12 @@
+<table>
+        <tr>
+            <td><img width="20" src="https://cdnjs.cloudflare.com/ajax/libs/octicons/8.5.0/svg/archive.svg" alt="archived" /></td>
+            <td><strong>Archived Repository</strong><br />
+            This code is no longer maintained. Feel free to fork it, but use it at your own risks.
+	    </td>
+        </tr>
+</table>
+
 # Marmelab Microrest
 
 Microrest is a Silex provider to setting up a REST API on top of a relational database, based on a YAML (RAML) configuration file.
