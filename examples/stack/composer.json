@@ -1,0 +1,23 @@
+{
+    "name": "marmelab/microrest-stack-example",
+    "authors": [
+        {
+            "name": "Jérôme Macias",
+            "email": "jerome.macias@gmail.com"
+        }
+    ],
+    "require": {
+        "stack/builder": "^1.0",
+        "stack/run": "^1.0",
+        "marmelab/microrest": "dev-stackphp",
+        "asm89/stack-cors": "dev-master"
+    },
+    "scripts": {
+        "run": [
+            "echo 'Started web server on http://localhost:8888'",
+            "php -S localhost:8888"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
