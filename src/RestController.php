@@ -25,11 +25,130 @@ class RestController
 
     public function getListAction($objectType, Request $request)
     {
+        // Prepare-prefixes
+        $strongFilterKeyPrefix = 'strong_filter_';
+        $searchOrKeyPrefix = 'search_or_';
+        $searchAndKeyPrefix = 'search_and_';
+
         $queryBuilder = $this->dbal
             ->createQueryBuilder()
-            ->select('o.*')
-            ->from($objectType, 'o')
-        ;
+            ->from($objectType, 'o');
+
+        $filterNames = array(
+            '_strongFilter',
+            '_strongFilterIn',
+            '_searchOr',
+            '_searchAnd',
+        );
+
+        // Fetching filters from request
+        $filters = array_combine(
+            $filterNames,
+            array_map(
+                function ($filter) use ($request) {
+                    return $request->query->get($filter);
+                },
+                $filterNames
+            )
+        );
+
+        // Throw expression when count of filters in request greater then one
+        $count = array_reduce(
+            $filters,
+            function ($carry, $item) {
+                return $carry + ($item !== null);
+            },
+            0
+        );
+        if ($count > 1) {
+            return new JsonResponse(
+                array(
+                    'status'      => 'ERROR',
+                    'status_code' => 400,
+                    'message'     => 'You should use only one type of filters per request',
+                ), 400
+            );
+        }
+
+        // Return only assigned fields
+        $fields = $request->query->get('_fields');
+        $queryBuilder->select(
+            $fields ? preg_replace('/([^,]+)/', 'o.$1', $fields) : 'o.*'
+        );
+
+        // Strong filter implementing
+        // o.f1 = 'val1' AND o.f2 = 'val2' ...
+        if ($filters['_strongFilter']) {
+            $queryBuilder
+                ->where(
+                    implode(
+                        ' and ',
+                        array_map(
+                            function ($item) use ($strongFilterKeyPrefix) {
+                                return "{$item} = :{$strongFilterKeyPrefix}{$item}";
+                            },
+                            array_keys($filters['_strongFilter'])
+                        )
+                    )
+                )
+                ->setParameters(
+                    array_combine(
+                        array_map(
+                            function ($key) use ($strongFilterKeyPrefix) {
+                                return $strongFilterKeyPrefix . $key;
+                            },
+                            array_keys($filters['_strongFilter'])
+                        ),
+                        $filters['_strongFilter']
+                    )
+                );
+        }
+
+        // Searching with OR:
+        // o.f1 LIKE '%val1%' OR o.f2 LIKE '%val2%'
+        if ($filters['_searchOr']) {
+            foreach ($filters['_searchOr'] as $key => $value) {
+                $queryBuilder
+                    ->orWhere(
+                        $queryBuilder->expr()->like(
+                            $key,
+                            ":" . $searchOrKeyPrefix . $key
+                        )
+                    )
+                    ->setParameter($searchOrKeyPrefix . $key, "%{$value}%");
+            }
+        }
+
+        if ($filters['_strongFilterIn']) {
+            foreach ($filters['_strongFilterIn'] as $key => $value) {
+                $queryBuilder
+                    ->andWhere(
+                        $queryBuilder->expr()->in(
+                            $key,
+                            explode(',', $value)
+                        )
+                    );
+            }
+        }
+
+        // Searching with AND:
+        // o.f1 LIKE '%val1%' AND o.f2 LIKE '%val2%'
+        if ($filters['_searchAnd']) {
+            foreach ($filters['_searchAnd'] as $key => $value) {
+                $queryBuilder
+                    ->andWhere(
+                        $queryBuilder->expr()->like(
+                            $key,
+                            ":" . $searchAndKeyPrefix . $key
+                        )
+                    )
+                    ->setParameter($searchAndKeyPrefix . $key, "%{$value}%");
+            }
+        }
+
+        if ($group = $request->query->get('_group')) {
+            $queryBuilder->groupBy($group);
+        }
 
         if ($sort = $request->query->get('_sort')) {
             $queryBuilder->orderBy($sort, $request->query->get('_sortDir', 'ASC'));
